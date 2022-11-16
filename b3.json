@@ -1,0 +1,28 @@
+aggregation()-
+projectdb> db.sales.aggregate([{ $match: { purchaseMethod: "Phone" } }, { $group: {_id: "$_id" ,couponStatus: {$first: "$couponUsed"}}}])
+
+projectdb> db.sales.aggregate([{ $group: { _id: "$storeLocation", resultCount: { $sum: 1 } } }, {$limit: 6 }])
+
+[
+  { _id: 'London', resultCount: 794 },
+  { _id: 'New York', resultCount: 501 },
+  { _id: 'Denver', resultCount: 1549 },
+  { _id: 'San Diego', resultCount: 346 },
+  { _id: 'Austin', resultCount: 676 },
+  { _id: 'Seattle', resultCount: 1134 }
+]
+
+Indexing-
+projectdb> db.sales.createIndex({_id: 1})
+_id_1
+
+projectdb> db.sales.getIndexes()
+[ { v: 2, key: { _id: 1 }, name: '_id_' } ]
+
+projectdb> db.sales.createIndex({_id: 1}, {name: "trender"})
+trender
+
+projectdb> db.sales.getIndexes()
+[ { v: 2, key: { _id: 1 }, name: '_id_' } ]
+
+projectdb>
